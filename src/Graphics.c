@@ -1,14 +1,13 @@
 #include "Graphics.h"
-#include "../utils/assert.c"
 
 int GRAPHICS_init(Graphics *graphics)
 {
     graphics->window = SDL_CreateWindow(
-        graphics->windowTitle,
+        TITLE,
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        graphics->width,
-        graphics->height,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
         SDL_WINDOW_SHOWN);
 
     if (graphics->window == NULL)
@@ -28,17 +27,28 @@ int GRAPHICS_init(Graphics *graphics)
     return 0;
 }
 
-void GRAPHICS_drawRedRect(Graphics *graphics)
-{
-    SDL_Rect fillRect = {graphics->width / 4, graphics->height / 4, 20, 20};
-    assert(SDL_SetRenderDrawColor(graphics->renderer, 0xFF, 0x00, 0x00, 0xFF));
-    assert(SDL_RenderFillRect(graphics->renderer, &fillRect));
-    SDL_RenderPresent(graphics->renderer);
-}
-
 void GRAPHICS_free(Graphics *graphics)
 {
     printf("DESTROY: Graphics\n");
     SDL_DestroyWindow(graphics->window);
     SDL_DestroyRenderer(graphics->renderer);
+}
+
+void GRAPHICS_draw(Graphics *graphics)
+{
+    SDL_RenderPresent(graphics->renderer);
+    SDL_Delay(1000 / FPS);
+}
+
+void GRAPHICS_clearScreen(Graphics *graphics)
+{
+    check(SDL_SetRenderDrawColor(graphics->renderer, 0x00, 0x00, 0x00, 0x00));
+    check(SDL_RenderClear(graphics->renderer));
+}
+
+void GRAPHICS_drawRedRect(Graphics *graphics)
+{
+    SDL_Rect fillRect = {WINDOW_WIDTH / 4, WINDOW_HEIGHT / 4, 20, 20};
+    check(SDL_SetRenderDrawColor(graphics->renderer, 0xFF, 0x00, 0x00, 0xFF));
+    check(SDL_RenderFillRect(graphics->renderer, &fillRect));
 }

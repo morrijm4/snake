@@ -1,6 +1,6 @@
 #include "SDL2/SDL.h"
 
-#include "Constants.h"
+#include "Config.h"
 #include "Engine.h"
 #include "StateManager.h"
 #include "MainMenu.h"
@@ -8,31 +8,20 @@
 
 int main()
 {
-  EngineOptions options;
-  options.title = "Snake";
-  options.height = WINDOW_HEIGHT;
-  options.width = WINDOW_WIDTH;
+  Engine engine = {0};
+  ENGINE_init(&engine);
 
-  Engine engine;
-  ENGINE_init(&engine, &options);
-
-  State mainMenu;
+  State mainMenu = {0};
   if (MAIN_MENU_ctor(&mainMenu))
     return 1;
 
-  STATEMANAGER_push(&engine.stateManager, &engine.graphics, &mainMenu);
+  STATEMANAGER_push(&engine.stateManager, &mainMenu);
 
-  GameOptions gameOptions;
-  gameOptions.boundaryHeight = BOUNDARY_HEIGHT;
-  gameOptions.boundaryWidth = BOUNDARY_WIDTH;
-  gameOptions.padding = PADDING;
-
-  State game;
-  if (GAME_ctor(&game, &gameOptions))
+  State game = {0};
+  if (GAME_ctor(&game))
     return 1;
 
-  STATEMANAGER_push(&engine.stateManager, &engine.graphics, &game);
-  STATEMANAGER_draw(&engine.stateManager, &engine.graphics);
+  STATEMANAGER_push(&engine.stateManager, &game);
 
   SDL_Event e;
   while (!engine.quit)
@@ -42,6 +31,10 @@ int main()
       if (e.type == SDL_QUIT)
         engine.quit = 1;
     }
+
+    GRAPHICS_clearScreen(&engine.graphics);
+    STATEMANAGER_draw(&engine.stateManager, &engine.graphics);
+    GRAPHICS_draw(&engine.graphics);
   }
 
   ENGINE_free(&engine);

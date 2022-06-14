@@ -39,7 +39,7 @@ int STATEMANAGER_scale(StateManager *stateManager)
   return stateManager->capacity;
 }
 
-int STATEMANAGER_push(StateManager *stateManager, Graphics *graphics, State *state)
+int STATEMANAGER_push(StateManager *stateManager, State *state)
 {
   if (stateManager->top + 1 == stateManager->capacity)
     STATEMANAGER_scale(stateManager);
@@ -47,7 +47,7 @@ int STATEMANAGER_push(StateManager *stateManager, Graphics *graphics, State *sta
   stateManager->stack[++stateManager->top] = state;
 
   if (state->init != NULL)
-    state->init(graphics, state->data);
+    state->init(state->data);
 
   printf("State pushed to the stack\n");
   return stateManager->top;

@@ -12,7 +12,7 @@ typedef unsigned int (*fnPtrGraphFlt)(Graphics *grpahics, float);
 
 typedef struct
 {
-  fnPtrGraphVoid init;
+  fnPtrVoid init;
   fnPtrFlt update;
   fnPtrGraphVoid draw;
   fnPtrVoid destroy;
@@ -31,7 +31,7 @@ int STATEMANAGER_init(StateManager *stateManager);
 int STATEMANAGER_free(StateManager *stateManager);
 int STATEMANAGER_scale(StateManager *stateManager);
 
-int STATEMANAGER_push(StateManager *stateManager, Graphics *graphics, State *state);
+int STATEMANAGER_push(StateManager *stateManager, State *state);
 int STATEMANAGER_pop(StateManager *stateManager);
 State *STATEMANAGER_top(StateManager *stateManager);
 

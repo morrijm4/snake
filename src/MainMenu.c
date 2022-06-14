@@ -1,9 +1,9 @@
 #include "MainMenu.h"
 
-unsigned int MAIN_MENU_init(Graphics *graphics, void *mainMenu)
+unsigned int MAIN_MENU_init(void *mainMenu)
 {
     MainMenu *mainMenuPtr = (MainMenu *)mainMenu;
-    mainMenuPtr->title = "Snake";
+    mainMenuPtr->title = TITLE;
 
     printf("INIT: Main Menu --> %s\n", mainMenuPtr->title);
 

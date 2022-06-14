@@ -46,6 +46,23 @@ void GRAPHICS_clearScreen(Graphics *graphics)
     check(SDL_RenderClear(graphics->renderer));
 }
 
+void GRAPHICS_setColor(Graphics *graphcs, Uint64 color)
+{
+    check(SDL_SetRenderDrawColor(graphcs->renderer, (color & 0xFF000000) >> 24, (color & 0xFF0000) >> 16, (color & 0xFF00) >> 8, color & 0xFF));
+}
+
+void GRAPHICS_drawBoundary(Graphics *graphics)
+{
+    const SDL_Rect boundary = {
+        PADDING,
+        PADDING,
+        BOUNDARY_WIDTH,
+        BOUNDARY_HEIGHT};
+
+    GRAPHICS_setColor(graphics, 0xFFFFFFFF);
+    check(SDL_RenderDrawRect(graphics->renderer, &boundary));
+}
+
 void GRAPHICS_drawRedRect(Graphics *graphics)
 {
     SDL_Rect fillRect = {WINDOW_WIDTH / 4, WINDOW_HEIGHT / 4, 20, 20};

@@ -30,14 +30,8 @@ unsigned int GAME_draw(Graphics *graphics, void *data)
         return 1;
     }
 
-    const SDL_Rect boundary = {
-        PADDING,
-        PADDING,
-        BOUNDARY_WIDTH,
-        BOUNDARY_HEIGHT};
-
-    check(SDL_SetRenderDrawColor(graphics->renderer, 0xFF, 0xFF, 0xFF, 0xFF));
-    check(SDL_RenderDrawRect(graphics->renderer, &boundary));
+    GRAPHICS_drawBoundary(graphics);
+    GRAPHICS_drawRedRect(graphics);
 
     return 0;
 }

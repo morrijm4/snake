@@ -2,8 +2,9 @@
 
 int main()
 {
-    char *str = "Hello World";
-    printf("%s", str);
+    u_int64_t i = (0xDEADBEEF & 0xFF00) >> 8;
+
+    printf("%llX", i);
 
     return 0;
 }

@@ -1,6 +1,10 @@
 #ifndef ENGINE_STATEMANAGER_H
 #define ENGINE_STATEMANAGER_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Check.h"
 #include "Graphics.h"
 
 typedef unsigned int (*fnPtr)();

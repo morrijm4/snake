@@ -17,12 +17,14 @@ typedef struct
 
 int GRAPHICS_init(Graphics *graphics);
 void GRAPHICS_free(Graphics *graphics);
+
 void GRAPHICS_draw(Graphics *graphics);
 void GRAPHICS_clearScreen(Graphics *graphics);
+void GRAPHICS_setColor(Graphics *graphics, Uint64 color);
 
 // Game Graphics
 
-void GRAPHICS_drawBountary(Graphics *graphics);
+void GRAPHICS_drawBoundary(Graphics *graphics);
 void GRAPHICS_drawRedRect(Graphics *graphics);
 
 #endif

@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../include/StateManager.h"
+#include "StateManager.h"
 
 int STATEMANAGER_init(StateManager *stateManager)
 {
@@ -90,7 +88,12 @@ int STATEMANAGER_draw(StateManager *stateManager, Graphics *graphics)
   State *state = STATEMANAGER_top(stateManager);
 
   if (state->draw != NULL)
-    return state->draw(graphics, state->data);
+  {
+    GRAPHICS_clearScreen(graphics);
+    check(state->draw(graphics, state->data));
+    GRAPHICS_draw(graphics);
+    return 0;
+  }
 
   return 1;
 }
